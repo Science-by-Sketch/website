@@ -3,59 +3,49 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Under Development</title>
-    <style>
-        @import url('https://cdnjs.cloudflare.com/ajax/libs/geist-font/1.0.0/geist-mono.css');
-
-        html,
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            background: #ffffff;
-        }
-
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-
-        .scribble-wrap {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-        }
-
-        .scribble-wrap img {
-            max-width: 60vw;
-            max-height: 60vh;
-            transform: rotate(-5deg);
-        }
-
-        .footer-text {
-            font-family: 'Geist Mono', monospace;
-            font-size: 14px;
-            letter-spacing: 0.05em;
-            color: #888888;
-            margin-bottom: 40px;
-            text-align: center;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Science by Sketch</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-    <div class="scribble-wrap">
-        <img src="scribbles.svg" alt="Scribble">
+    <div class="content">
+        <div class="scribble-wrap">
+            <img src="assets/scribbles_desk.svg" alt="Science by Sketch mascot" id="mascot">
+        </div>
+
+        <h1>Science by Sketch</h1>
+        <p class="subtitle">Promoting early STEM education among young students by teaching through art</p>
+        <button class="subscribe-btn" id="openModalBtn">Subscribe to Newsletter</button>
     </div>
 
-    <div class="footer-text">THIS PAGE IS CURRENTLY UNDER DEVELOPMENT</div>
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="modal">
+            <div class="modal-form" id="modalForm">
+                <h2>Subscribe to Newsletter</h2>
+                <p>Enter your email and we'll send you a welcome note to confirm you're on the list.</p>
+                <input type="email" id="emailInput" placeholder="you@example.com" autocomplete="email">
+                <div class="modal-actions">
+                    <button class="btn-cancel" id="cancelBtn">Cancel</button>
+                    <button class="btn-submit" id="submitBtn">Subscribe</button>
+                </div>
+                <div class="modal-status" id="modalStatus"></div>
+            </div>
 
+            <div class="modal-success" id="modalSuccess">
+                <svg class="success-check-icon" viewBox="0 0 52 52" width="56" height="56" aria-hidden="true">
+                    <circle class="success-check-circle" cx="26" cy="26" r="23" fill="none"></circle>
+                    <path class="success-check-mark" fill="none" d="M14 27l7 7 16-16"></path>
+                </svg>
+                <h2>You're subscribed!</h2>
+                <p>We sent a welcome note to <strong id="successEmail"></strong>.</p>
+                <button class="btn-submit" id="doneBtn">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 
 </html>

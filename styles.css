@@ -1,0 +1,394 @@
+:root {
+    --ink: #0a0a0a;
+    --muted: #6b6b6b;
+    --bg: #ffffff;
+    --font-heading: -apple-system, ui-rounded, "SF Pro Rounded", "SF Pro Display", "Segoe UI Rounded", Verdana, sans-serif;
+    --font-body: -apple-system, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: var(--bg);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 24px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* ---------- entrance sequence ---------- */
+/* One orchestrated reveal on load: mascot, then heading, then subtitle,
+   then button, each stepping in slightly after the last. */
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 480px;
+}
+
+.scribble-wrap,
+h1,
+.subtitle,
+.subscribe-btn {
+    opacity: 0;
+    animation: rise-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.scribble-wrap {
+    animation-delay: 0.05s;
+}
+
+h1 {
+    animation-delay: 0.2s;
+}
+
+.subtitle {
+    animation-delay: 0.32s;
+}
+
+.subscribe-btn {
+    animation-delay: 0.44s;
+}
+
+@keyframes rise-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.scribble-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.scribble-wrap img {
+    max-width: 45vw;
+    max-height: 260px;
+    animation: rise-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.05s forwards,
+        idle-bob 5s ease-in-out 0.8s infinite;
+}
+
+/* Gentle, slow idle motion on the mascot once it's settled in \u2014
+   the one piece of ambient character motion on the page. */
+@keyframes idle-bob {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-4px) rotate(-0.6deg);
+    }
+}
+
+h1 {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 44px;
+    line-height: 1.1;
+    color: var(--ink);
+    margin: 8px 0 12px;
+}
+
+.subtitle {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--muted);
+    margin: 0 0 16px;
+}
+
+.subscribe-btn {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 16px;
+    color: #ffffff;
+    background: var(--ink);
+    border: none;
+    border-radius: 999px;
+    padding: 16px 32px;
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, opacity 0.15s ease;
+}
+
+.subscribe-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(10, 10, 10, 0.18);
+}
+
+.subscribe-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 10px rgba(10, 10, 10, 0.16);
+}
+
+.subscribe-btn:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 3px;
+}
+
+/* ---------- modal ---------- */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 10, 10, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    box-sizing: border-box;
+    z-index: 10;
+    pointer-events: none;
+    transition: background 0.25s ease;
+}
+
+.modal-overlay.open {
+    background: rgba(10, 10, 10, 0.4);
+    pointer-events: auto;
+}
+
+.modal {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 28px;
+    width: 100%;
+    max-width: 360px;
+    box-sizing: border-box;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    transform: translateY(8px) scale(0.97);
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-overlay.open .modal {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.modal-form,
+.modal-success {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-success {
+    display: none;
+    align-items: center;
+    text-align: center;
+}
+
+.modal.success .modal-form {
+    display: none;
+}
+
+.modal.success .modal-success {
+    display: flex;
+}
+
+.modal-success h2,
+.modal-success p {
+    text-align: center;
+}
+
+.modal-success .btn-submit {
+    width: 100%;
+    margin-top: 4px;
+}
+
+.success-check-icon {
+    margin-bottom: 16px;
+}
+
+.success-check-circle {
+    stroke: var(--ink);
+    stroke-width: 2;
+    stroke-dasharray: 146;
+    stroke-dashoffset: 146;
+    animation: draw-circle 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+}
+
+.success-check-mark {
+    stroke: var(--ink);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 34;
+    stroke-dashoffset: 34;
+    animation: draw-check 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+}
+
+@keyframes draw-circle {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes draw-check {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.modal h2 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--ink);
+    margin: 0 0 8px;
+}
+
+.modal p {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--muted);
+    margin: 0 0 20px;
+    line-height: 1.5;
+}
+
+.modal input[type="email"] {
+    font-family: var(--font-body);
+    font-size: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 16px;
+    border: 1px solid #dcdcdc;
+    border-radius: 999px;
+    margin-bottom: 16px;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.modal input[type="email"]:focus {
+    border-color: var(--ink);
+    box-shadow: 0 0 0 3px rgba(10, 10, 10, 0.08);
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.modal-actions button,
+.modal-success .btn-submit {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    border-radius: 999px;
+    padding: 12px 20px;
+    cursor: pointer;
+    flex: 1;
+    transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.15s ease;
+}
+
+.modal-actions button:hover,
+.modal-success .btn-submit:hover {
+    transform: translateY(-1px);
+    opacity: 0.85;
+}
+
+.modal-actions button:active,
+.modal-success .btn-submit:active {
+    transform: translateY(0);
+}
+
+.modal-actions button:focus-visible,
+.modal-success .btn-submit:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 3px;
+}
+
+.btn-cancel {
+    background: #f0f0f0;
+    color: var(--ink);
+}
+
+.btn-submit {
+    background: var(--ink);
+    color: #ffffff;
+}
+
+.btn-submit:disabled {
+    opacity: 0.6;
+    cursor: default;
+    transform: none;
+}
+
+.modal-status {
+    font-family: var(--font-body);
+    font-size: 13px;
+    margin-top: 12px;
+    min-height: 16px;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.modal-status.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.modal-status.success {
+    color: #1a7f37;
+}
+
+.modal-status.error {
+    color: #c0362c;
+}
+
+/* ---------- accessibility ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .scribble-wrap,
+    h1,
+    .subtitle,
+    .subscribe-btn {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+
+    .scribble-wrap img {
+        animation: none;
+    }
+
+    .subscribe-btn,
+    .modal-actions button,
+    .modal,
+    .modal-overlay,
+    .modal-status,
+    .modal input[type="email"] {
+        transition: none;
+    }
+
+    .success-check-circle,
+    .success-check-mark {
+        animation: none;
+        stroke-dashoffset: 0;
+    }
+}
