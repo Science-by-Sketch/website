@@ -10,15 +10,149 @@
 
 <body>
 
-    <div class="content">
-        <div class="scribble-wrap">
-            <img src="assets/scribbles_desk.svg" alt="Science by Sketch mascot" id="mascot">
+    <header class="site-header" id="siteHeader">
+        <div class="site-header-inner">
+            <a href="index.html" class="site-logo">Science by Sketch</a>
+            <nav class="site-nav">
+                <a href="articles.html">Articles</a>
+                <a href="blog.html">Blog</a>
+                <a href="newsletter.html">Newsletter</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="content">
+            <div class="scribble-wrap">
+                <img src="https://cdn.jsdelivr.net/gh/Science-by-Sketch/assets@main/scribbles_desk.svg"
+                    alt="Science by Sketch mascot" id="mascot">
+            </div>
+
+            <h1>Science by Sketch</h1>
+            <p class="subtitle">Promoting early STEM education among young students by teaching through art</p>
+            <button class="subscribe-btn" id="openModalBtn" hidden>Subscribe to Newsletter</button>
+        </div>
+    </section>
+
+    <section class="mission">
+        <div class="mission-inner reveal">
+            <h2>Our Mission</h2>
+            <p>Science by Sketch makes STEM easier to understand by turning science into cartoons, drawings, and
+                visual stories. We want to make learning science more fun, creative, and memorable while inspiring
+                students to explore STEM from an early age.</p>
+        </div>
+        <div class="mission-image reveal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <circle cx="8.5" cy="8.5" r="1.5" />
+                <path d="M21 15l-5-5-4 4-3-3-6 6" />
+            </svg>
+        </div>
+    </section>
+
+    <section class="drawn-conclusions">
+        <div class="dc-top">
+            <div class="dc-image reveal">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                    <circle cx="8.5" cy="8.5" r="1.5" />
+                    <path d="M21 15l-5-5-4 4-3-3-6 6" />
+                </svg>
+            </div>
+            <div class="dc-header reveal">
+                <h2>Drawn Conclusions</h2>
+                <p>Our newsletter, Drawn Conclusions, brings Science by Sketch comics, articles, and ideas straight to
+                    your inbox. Everything is student-made, science-focused, and simple. There's no clutter, no
+                    AI-generated slop, just things worth reading.</p>
+            </div>
         </div>
 
-        <h1>Science by Sketch</h1>
-        <p class="subtitle">Promoting early STEM education among young students by teaching through art</p>
-        <button class="subscribe-btn" id="openModalBtn">Subscribe to Newsletter</button>
-    </div>
+        <div class="dc-grid">
+            <div class="dc-card reveal">
+                <svg class="dc-icon" viewBox="0 0 48 48" aria-hidden="true">
+                    <rect x="6" y="10" width="36" height="28" rx="2" fill="none" stroke="currentColor"
+                        stroke-width="2" />
+                    <line x1="12" y1="18" x2="30" y2="18" stroke="currentColor" stroke-width="2" />
+                    <line x1="12" y1="24" x2="30" y2="24" stroke="currentColor" stroke-width="2" />
+                    <line x1="12" y1="30" x2="24" y2="30" stroke="currentColor" stroke-width="2" />
+                    <line x1="34" y1="18" x2="34" y2="30" stroke="currentColor" stroke-width="2" />
+                </svg>
+                <div class="dc-number">50+</div>
+                <p>Newsletter sent to our subscribers all across the globe</p>
+            </div>
+            <div class="dc-card reveal">
+                <svg class="dc-icon" viewBox="0 0 48 48" aria-hidden="true">
+                    <circle cx="17" cy="16" r="7" fill="none" stroke="currentColor" stroke-width="2" />
+                    <path d="M5 40c0-8.837 5.373-15 12-15s12 6.163 12 15" fill="none" stroke="currentColor"
+                        stroke-width="2" />
+                    <circle cx="34" cy="18" r="5.5" fill="none" stroke="currentColor" stroke-width="2" />
+                    <path d="M28 40c0-6.627 3.582-11 9-11s9 4.373 9 11" fill="none" stroke="currentColor"
+                        stroke-width="2" />
+                </svg>
+                <div class="dc-number">15+</div>
+                <p>Members writing, drawing, and teaching for Science by Sketch</p>
+            </div>
+            <div class="dc-card reveal">
+                <svg class="dc-icon" viewBox="0 0 48 48" aria-hidden="true">
+                    <path d="M8 40l3-11L33 7l7 7-22 22z" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linejoin="round" />
+                    <path d="M27 13l7 7" fill="none" stroke="currentColor" stroke-width="2" />
+                    <path d="M11 29l7 7" fill="none" stroke="currentColor" stroke-width="2" />
+                </svg>
+                <div class="dc-number">30+</div>
+                <p>Illustrations turning science lessons into art</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="volunteer">
+        <div class="volunteer-text reveal">
+            <h2>Want us to volunteer</h2>
+            <p>We have 15 teachers who are excited to share their knowledge with your students. Currently, we
+                volunteer at libraries and tutor students, but we believe we can have the biggest impact inside the
+                classroom. If you would like us to come in and give your students a lesson please reach out! We will
+                reach out to you directly, within 48 hours.</p>
+        </div>
+        <div class="volunteer-form-placeholder reveal">Form Coming Soon</div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="footer-logo">Science by Sketch</div>
+                <p>Where science meets storytelling</p>
+            </div>
+
+            <div class="footer-col">
+                <h3>Explore</h3>
+                <a href="#">About</a>
+                <a href="#">Members</a>
+                <a href="articles.html">Articles</a>
+                <a href="blog.html">Blog</a>
+                <a href="newsletter.html">Newsletter</a>
+            </div>
+
+            <div class="footer-col">
+                <h3>Get Involved</h3>
+                <a href="#">For Schools</a>
+                <a href="#">Volunteer</a>
+                <a href="#">Contact</a>
+            </div>
+
+            <div class="footer-col">
+                <h3>Connect</h3>
+                <a href="#">Instagram</a>
+                <a href="#">TikTok</a>
+                <a href="#">YouTube</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Science by Sketch</p>
+            <p>Have a question for us? Email us at <a
+                    href="mailto:sciencebysketch@gmail.com">sciencebysketch@gmail.com</a></p>
+        </div>
+    </footer>
 
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal" id="modal">

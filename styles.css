@@ -1,16 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
 :root {
     --ink: #0a0a0a;
     --muted: #6b6b6b;
+    --line: #e6e6e6;
+    --panel: #f6f6f4;
     --bg: #ffffff;
-    --font-heading: -apple-system, ui-rounded, "SF Pro Rounded", "SF Pro Display", "Segoe UI Rounded", Verdana, sans-serif;
-    --font-body: -apple-system, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-heading: 'Nunito', -apple-system, ui-rounded, "SF Pro Rounded", "SF Pro Display", "Segoe UI Rounded", Verdana, sans-serif;
+    --font-body: 'Inter', -apple-system, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "Menlo", "Consolas", monospace;
 }
 
 html,
 body {
     margin: 0;
     padding: 0;
-    height: 100%;
     background: var(--bg);
 }
 
@@ -18,29 +22,116 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
-    padding: 24px;
     box-sizing: border-box;
-    overflow: hidden;
 }
 
-/* ---------- entrance sequence ---------- */
-/* One orchestrated reveal on load: mascot, then heading, then subtitle,
-   then button, each stepping in slightly after the last. */
+* {
+    box-sizing: border-box;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* ---------- header ---------- */
+
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding: 16px 24px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid transparent;
+    display: flex;
+    justify-content: center;
+    transform: translateY(-100%);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+    z-index: 30;
+}
+
+.site-header.visible {
+    transform: translateY(0);
+    border-bottom-color: var(--line);
+}
+
+.site-header-inner {
+    width: 100%;
+    max-width: 1120px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.site-logo {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 17px;
+    color: var(--ink);
+}
+
+.site-nav {
+    display: flex;
+    gap: 26px;
+}
+
+.site-nav a {
+    position: relative;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--muted);
+    transition: color 0.15s ease;
+}
+
+.site-nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 100%;
+    bottom: -4px;
+    height: 2px;
+    background: var(--ink);
+    transition: right 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.site-nav a:hover {
+    color: var(--ink);
+}
+
+.site-nav a:hover::after {
+    right: 0;
+}
+
+/* ---------- hero ---------- */
+
+.hero {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    box-sizing: border-box;
+}
 
 .content {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    max-width: 480px;
+    max-width: 600px;
 }
 
 .scribble-wrap,
 h1,
 .subtitle,
-.subscribe-btn {
+.subscribe-btn,
+.coming-soon {
     opacity: 0;
     animation: rise-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -59,6 +150,10 @@ h1 {
 
 .subscribe-btn {
     animation-delay: 0.44s;
+}
+
+.coming-soon {
+    animation-delay: 0.54s;
 }
 
 @keyframes rise-in {
@@ -82,14 +177,13 @@ h1 {
 }
 
 .scribble-wrap img {
-    max-width: 45vw;
-    max-height: 260px;
+    width: 100%;
+    max-width: 220px;
+    height: auto;
     animation: rise-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.05s forwards,
         idle-bob 5s ease-in-out 0.8s infinite;
 }
 
-/* Gentle, slow idle motion on the mascot once it's settled in \u2014
-   the one piece of ambient character motion on the page. */
 @keyframes idle-bob {
 
     0%,
@@ -105,10 +199,10 @@ h1 {
 h1 {
     font-family: var(--font-heading);
     font-weight: 800;
-    font-size: 44px;
+    font-size: 52px;
     line-height: 1.1;
     color: var(--ink);
-    margin: 8px 0 12px;
+    margin: 8px 0 14px;
 }
 
 .subtitle {
@@ -117,13 +211,14 @@ h1 {
     font-size: 17px;
     line-height: 1.5;
     color: var(--muted);
-    margin: 0 0 16px;
+    margin: 0 0 26px;
+    max-width: 440px;
 }
 
 .subscribe-btn {
     font-family: var(--font-body);
     font-weight: 600;
-    font-size: 16px;
+    font-size: 15px;
     color: #ffffff;
     background: var(--ink);
     border: none;
@@ -135,17 +230,278 @@ h1 {
 
 .subscribe-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 24px rgba(10, 10, 10, 0.18);
+    box-shadow: 0 8px 18px rgba(10, 10, 10, 0.10);
 }
 
 .subscribe-btn:active {
     transform: translateY(0);
-    box-shadow: 0 4px 10px rgba(10, 10, 10, 0.16);
+    box-shadow: 0 4px 8px rgba(10, 10, 10, 0.08);
 }
 
 .subscribe-btn:focus-visible {
     outline: 2px solid var(--ink);
     outline-offset: 3px;
+}
+
+.subscribe-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.coming-soon {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--muted);
+    margin: 12px 0 0;
+}
+
+/* ---------- reveal-on-scroll ---------- */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ---------- shared section layout ---------- */
+
+.mission,
+.drawn-conclusions,
+.volunteer {
+    width: 100%;
+    max-width: 1120px;
+    padding: 60px 24px;
+}
+
+.mission h2,
+.drawn-conclusions h2,
+.volunteer h2 {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 30px;
+    color: var(--ink);
+    margin: 0 0 12px;
+}
+
+.mission p,
+.drawn-conclusions p,
+.volunteer p {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--muted);
+    margin: 0;
+}
+
+/* ---------- image placeholders ---------- */
+
+.mission-image,
+.dc-image {
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    border-radius: 20px;
+    background: var(--panel);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+}
+
+.mission-image svg,
+.dc-image svg {
+    width: 100px;
+    height: 100px;
+}
+
+/* ---------- mission ---------- */
+
+.mission {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+}
+
+.mission-inner {
+    max-width: 400px;
+}
+
+/* ---------- drawn conclusions ---------- */
+
+.dc-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+}
+
+.dc-header {
+    max-width: 400px;
+    margin-left: auto;
+    text-align: right;
+}
+
+.dc-grid {
+    margin-top: 44px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.dc-card {
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    min-height: 260px;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 28px;
+    color: var(--ink);
+}
+
+.dc-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 20px rgba(10, 10, 10, 0.04);
+}
+
+.dc-icon {
+    color: var(--ink);
+    margin-bottom: 14px;
+    width: 84px;
+    height: 84px;
+}
+
+.dc-number {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 32px;
+    color: var(--ink);
+    margin-bottom: 8px;
+}
+
+.dc-card p {
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* ---------- volunteer ---------- */
+
+.volunteer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+}
+
+.volunteer-text h2 {
+    margin-bottom: 12px;
+}
+
+.volunteer-form-placeholder {
+    min-height: 260px;
+    border-radius: 20px;
+    background: var(--panel);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 17px;
+    color: #c0362c;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+
+.volunteer-form-placeholder:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 20px rgba(10, 10, 10, 0.04);
+}
+
+/* ---------- footer ---------- */
+
+.site-footer {
+    width: 100%;
+    border-top: 1px solid var(--line);
+    margin-top: 36px;
+}
+
+.footer-top {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 52px 24px 36px;
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
+    gap: 32px;
+}
+
+.footer-logo {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 23px;
+    color: var(--ink);
+    margin-bottom: 8px;
+}
+
+.footer-brand p {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--muted);
+    margin: 0;
+}
+
+.footer-col h3 {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--ink);
+    margin: 0 0 14px;
+}
+
+.footer-col a {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 10px;
+    transition: color 0.15s ease;
+}
+
+.footer-col a:hover {
+    color: var(--ink);
+}
+
+.footer-bottom {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 20px 24px 36px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.footer-bottom p {
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0;
+}
+
+.footer-bottom a {
+    color: var(--ink);
+    font-weight: 600;
 }
 
 /* ---------- modal ---------- */
@@ -159,7 +515,7 @@ h1 {
     justify-content: center;
     padding: 24px;
     box-sizing: border-box;
-    z-index: 10;
+    z-index: 40;
     pointer-events: none;
     transition: background 0.25s ease;
 }
@@ -176,7 +532,7 @@ h1 {
     width: 100%;
     max-width: 360px;
     box-sizing: border-box;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
     opacity: 0;
     transform: translateY(8px) scale(0.97);
     transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
@@ -255,14 +611,14 @@ h1 {
 .modal h2 {
     font-family: var(--font-heading);
     font-weight: 700;
-    font-size: 20px;
+    font-size: 19px;
     color: var(--ink);
     margin: 0 0 8px;
 }
 
 .modal p {
     font-family: var(--font-body);
-    font-size: 14px;
+    font-size: 13px;
     color: var(--muted);
     margin: 0 0 20px;
     line-height: 1.5;
@@ -270,7 +626,7 @@ h1 {
 
 .modal input[type="email"] {
     font-family: var(--font-body);
-    font-size: 15px;
+    font-size: 14px;
     width: 100%;
     box-sizing: border-box;
     padding: 12px 16px;
@@ -295,7 +651,7 @@ h1 {
 .modal-success .btn-submit {
     font-family: var(--font-body);
     font-weight: 600;
-    font-size: 15px;
+    font-size: 14px;
     border: none;
     border-radius: 999px;
     padding: 12px 20px;
@@ -339,7 +695,7 @@ h1 {
 
 .modal-status {
     font-family: var(--font-body);
-    font-size: 13px;
+    font-size: 12px;
     margin-top: 12px;
     min-height: 16px;
     opacity: 0;
@@ -360,6 +716,97 @@ h1 {
     color: #c0362c;
 }
 
+/* ---------- under-development pages ---------- */
+
+.dev-body {
+    height: 100vh;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.dev-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 24px;
+    padding: 24px;
+}
+
+.dev-logo {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 17px;
+    color: var(--ink);
+    position: fixed;
+    top: 28px;
+    left: 24px;
+}
+
+.dev-mascot {
+    width: 100%;
+    max-width: 240px;
+    height: auto;
+    animation: idle-bob 5s ease-in-out infinite;
+}
+
+.dev-message {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    margin: 0;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 860px) {
+
+    h1 {
+        font-size: 38px;
+    }
+
+    .mission,
+    .dc-top {
+        grid-template-columns: 1fr;
+    }
+
+    .mission-image,
+    .dc-image {
+        max-width: 320px;
+        margin: 0 auto;
+    }
+
+    .dc-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dc-header {
+        text-align: left;
+        margin-left: 0;
+        max-width: none;
+    }
+
+    .volunteer {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-top {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .site-nav {
+        gap: 16px;
+    }
+}
+
+@media (max-width: 520px) {
+    .footer-top {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* ---------- accessibility ---------- */
 
 @media (prefers-reduced-motion: reduce) {
@@ -373,7 +820,8 @@ h1 {
         transform: none;
     }
 
-    .scribble-wrap img {
+    .scribble-wrap img,
+    .dev-mascot {
         animation: none;
     }
 
@@ -382,8 +830,20 @@ h1 {
     .modal,
     .modal-overlay,
     .modal-status,
-    .modal input[type="email"] {
+    .modal input[type="email"],
+    .site-nav a,
+    .site-nav a::after,
+    .footer-col a,
+    .site-header,
+    .dc-card,
+    .volunteer-form-placeholder,
+    .reveal {
         transition: none;
+    }
+
+    .reveal {
+        opacity: 1;
+        transform: none;
     }
 
     .success-check-circle,
