@@ -230,12 +230,12 @@ h1 {
 
 .subscribe-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 18px rgba(10, 10, 10, 0.10);
+    box-shadow: 0 6px 14px rgba(10, 10, 10, 0.06);
 }
 
 .subscribe-btn:active {
     transform: translateY(0);
-    box-shadow: 0 4px 8px rgba(10, 10, 10, 0.08);
+    box-shadow: 0 3px 6px rgba(10, 10, 10, 0.05);
 }
 
 .subscribe-btn:focus-visible {
@@ -315,10 +315,9 @@ h1 {
     color: var(--muted);
 }
 
-.mission-image svg,
-.dc-image svg {
-    width: 100px;
-    height: 100px;
+.placeholder-icon {
+    font-size: 64px;
+    color: var(--muted);
 }
 
 /* ---------- mission ---------- */
@@ -372,14 +371,14 @@ h1 {
 
 .dc-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 10px 20px rgba(10, 10, 10, 0.04);
+    box-shadow: 0 8px 16px rgba(10, 10, 10, 0.03);
 }
 
 .dc-icon {
     color: var(--ink);
     margin-bottom: 14px;
-    width: 84px;
-    height: 84px;
+    font-size: 88px;
+    line-height: 1;
 }
 
 .dc-number {
@@ -418,13 +417,13 @@ h1 {
     font-family: var(--font-body);
     font-weight: 700;
     font-size: 17px;
-    color: #c0362c;
+    color: #585858;
     transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
 }
 
 .volunteer-form-placeholder:hover {
     transform: translateY(-6px);
-    box-shadow: 0 10px 20px rgba(10, 10, 10, 0.04);
+    box-shadow: 0 8px 16px rgba(10, 10, 10, 0.03);
 }
 
 /* ---------- footer ---------- */
@@ -532,7 +531,7 @@ h1 {
     width: 100%;
     max-width: 360px;
     box-sizing: border-box;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
     opacity: 0;
     transform: translateY(8px) scale(0.97);
     transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
